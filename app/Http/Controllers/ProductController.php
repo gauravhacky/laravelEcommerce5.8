@@ -92,4 +92,9 @@ class ProductController extends Controller
                 $products->save();
                 return redirect()->route('list.product')->with('flash_message_success','Product Successfully Updated');
         }
+
+        public function deleteproduct($id)
+        {
+                
+        }
 }

@@ -28,5 +28,6 @@ Route::get('/product/list','ProductController@productList')->name('list.product'
 Route::post('store/products','ProductController@storeproduct')->name('stores.product');
 Route::get('edit/product/{id}','ProductController@editproduct')->name('edit.product');
 Route::post('edit/product/{id}','ProductController@updateproduct')->name('update.product');
+Route::get('delete/product/{id}','ProductController@deleteproduct')->name('delete.product');
 }); 
 Route::get('/logout','AdminController@logout');
