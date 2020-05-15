@@ -26,5 +26,7 @@ Route::match(['get','post'],'admin/dashboard','AdminController@dashboard');
 Route::get('/add/product','ProductController@addproduct')->name('add.product');
 Route::get('/product/list','ProductController@productList')->name('list.product');
 Route::post('store/products','ProductController@storeproduct')->name('stores.product');
+Route::get('edit/product/{id}','ProductController@editproduct')->name('edit.product');
+Route::post('edit/product/{id}','ProductController@updateproduct')->name('update.product');
 }); 
 Route::get('/logout','AdminController@logout');

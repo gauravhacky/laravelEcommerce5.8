@@ -9,6 +9,7 @@
       <!-- jQuery -->
       <script src="{{asset('backend_assets/plugins/jQuery/jquery-1.12.4.min.js')}}" type="text/javascript"></script>
       <!-- jquery-ui --> 
+      <script src="{{asset('js/validationplugin.js')}}" type="text/javascript"></script>
       <script src="{{asset('backend_assets/plugins/jquery-ui-1.12.1/jquery-ui.min.js')}}" type="text/javascript"></script>
       <!-- Bootstrap -->
       <script src="{{asset('backend_assets/bootstrap/js/bootstrap.min.js')}}" type="text/javascript"></script>
@@ -39,6 +40,8 @@
          =====================================================================-->
       <!-- Dashboard js -->
       <script src="{{asset('backend_assets/dist/js/dashboard.js')}}" type="text/javascript"></script>
+      <script type="text/javascript" charset="utf8" src="{{asset('js/datatable.js')}}"></script>
+
       <!-- End Theme label Script
          =====================================================================-->
       <script>

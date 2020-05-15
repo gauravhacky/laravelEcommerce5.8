@@ -34,16 +34,18 @@
       <!-- <link href="{{('backend_assets/plugins/emojionearea/emojionearea.min.css')}}" rel="stylesheet" type="text/css"/> -->
       <!-- Monthly css -->
       <link href="{{asset('backend_assets/plugins/monthly/monthly.css')}}" rel="stylesheet" type="text/css"/>
-      <!-- End page Label Plugins 
+      <!-- End page Label Plugins  
          =====================================================================-->
       <!-- Start Theme Layout Style
          =====================================================================-->
       <!-- Theme style -->
+      <link href="{{asset('css/backendcustom.css')}}" rel="stylesheet" type="text/css"/>
       <link href="{{asset('backend_assets/dist/css/stylecrm.css')}}" rel="stylesheet" type="text/css"/>
       <!-- Theme style rtl -->
       <link href="{{asset('backend_assets/dist/css/stylecrm-rtl.css')}}" rel="stylesheet" type="text/css"/>
       <!-- End Theme Layout Style
          =====================================================================-->
+      <link rel="stylesheet" type="text/css" href="{{asset('css/datatable.css')}}">
    </head>
    <body class="hold-transition sidebar-mini">
       <!--preloader-->
