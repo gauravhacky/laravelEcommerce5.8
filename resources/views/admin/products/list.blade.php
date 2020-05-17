@@ -75,7 +75,7 @@
                                        <th>Color</th>
                                        <th>Price</th>
                                        <th>Description</th>
-                                       <th>Heading</th>
+                                       <th>Added At</th>
                                        <th>Status</th>
                                        <th>Action</th>
                                     </tr>
@@ -89,11 +89,12 @@
                                        <td>{{ $product->color }}</td>
                                        <td>{{ $product->price }}</td>
                                        <td>{{ $product->description }}</td>
-                                       <td>27th April,2017</td>
+                                       <td>{{ date('d-m-y', strtotime($product->created_at)) }}
+                                       </td>
                                        <td><span class="label-custom label label-default">Active</span></td>
                                        <td>
                                           <a href="{{route('edit.product',$product->id)}}" class="btn btn-add btn-sm" data-toggle="modal" data-target=""><i class="fa fa-pencil"></i></a>
-                                          <a href="" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#customer2"><i class="fa fa-trash-o"></i> </a>
+                                          <a href="" class="btn btn-danger btn-sm" data-toggle="modal" data-target=""><i class="fa fa-trash-o"></i> </a>
                                        </td>
                                     </tr>
                                  @endforeach
