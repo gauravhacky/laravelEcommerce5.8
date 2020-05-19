@@ -1,5 +1,5 @@
 @extends('admin.layout.master')
-@section('title','Product List')
+@section('title','Category List')
 @section('content')
 <div class="content-wrapper">
             <!-- Content Header (Page header) -->
@@ -8,8 +8,8 @@
                   <i class="fa fa-product-hunt"></i>
                </div>
                <div class="header-title">
-                  <h1>Products</h1>
-                  <small>Product List</small>
+                  <h1>Category</h1>
+                  <small>Category List</small>
                </div>
             </section>
          @if(Session::has('flash_message_error'))
@@ -30,7 +30,7 @@
         @endif
         <div id="message_success" style="display:none;" class="alert-sm alert-success">Status Enabled</div> 
         <div id="message_error" style="display:none;" class="alert-sm alert-danger">Status Disabled</div> 
-            <!-- Main content -->
+         <!-- Main content -->
             <section class="content">
                <div class="row">
                   <div class="col-sm-12">
@@ -38,7 +38,7 @@
                         <div class="panel-heading">
                            <div class="btn-group" id="buttonexport">
                               <a href="">
-                                 <h4>Products</h4>
+                                 <h4>Category</h4>
                               </a>
                            </div>
                         </div>
@@ -46,7 +46,7 @@
                         <!-- Plugin content:powerpoint,txt,pdf,png,word,xl -->
                            <div class="btn-group">
                               <div class="buttonexport" id="buttonlist"> 
-                                 <a class="btn btn-add" href="{{route('add.product')}}"> <i class="fa fa-plus"></i> Add Product
+                                 <a class="btn btn-add" href="{{route('add.category')}}"> <i class="fa fa-plus"></i> Add Category
                                  </a>  
                               </div>
                               <button class="btn btn-exp btn-sm dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i> Export Table Data</button>
@@ -72,39 +72,34 @@
                               <table id="list_table" class="table table-bordered table-striped table-hover">
                                  <thead>
                                     <tr class="info">
-                                       <th>Image</th>
-                                       <th>Product Name</th>
-                                       <th>Category Id</th>
-                                       <th>Code</th>
-                                       <th>Color</th>
-                                       <th>Price</th>
+                                       <th>Category Name</th>
+                                       <th>Parant Id</th>
+                                       <th>Url</th>
                                        <th>Description</th>
-                                       <th>Added At</th>
                                        <th>Status</th>
+                                       <th>Added At</th>
                                        <th>Action</th>
                                     </tr>
                                  </thead>
                                  <tbody>
-                                 @foreach($products as $key => $product)
+                                 @foreach($category as $key => $cat)
                                     <tr>
-                                       <td><img src="{{ URL::asset('uploads/products/'.$product->image) }}" class="img-circle" alt="User Image" width="50" height="50"> </td>
-                                       <td>{{ $product->name}}</td>
-                                       <td>{{ $product->category_id }}</td>
-                                       <td>{{ $product->code }}</td>
-                                       <td>{{ $product->color }}</td>
-                                       <td>{{ $product->price }}</td>
-                                       <td>{{ $product->description }}</td>
-                                       <td>{{ date('d-m-y', strtotime($product->created_at)) }}
-                                       </td>
+                                       
+                                       <td>{{ $cat->name}}</td>
+                                       <td>{{ $cat->parent_id }}</td>
+                                       <td>{{ $cat->url }}</td>
+                                       <td>{{ $cat->description }}</td>
                                        <td>
-                                      <input type="checkbox" class="ProductStatus btn btn-success" rel="{{$product->id}}" data-toggle="toggle" data-on="Enabled" data-off="Disabled" data-onstyle="success" data-offstyle="danger"
-                                      @if($product->status=="1") checked @endif>
+                                      <input type="checkbox" class="CategoryStatus btn btn-success" rel="{{$cat->id}}" data-toggle="toggle" data-on="Enabled" data-off="Disabled" data-onstyle="success" data-offstyle="danger"
+                                      @if($cat->status=="1") checked @endif>
                                       <div id="myElem" style="display:none;" class="alert alert-success">Status Enabled</div>
                                        
                                        </td>
+                                       <td>{{ date('d-m-y', strtotime($cat->created_at)) }}
+                                       </td>
                                        <td>
-                                          <a href="{{route('edit.product',$product->id)}}" class="btn btn-add btn-sm" data-target=""><i class="fa fa-pencil"></i></a>
-                                          <button class="deleteRecord" data-id="{{ $product->id }}"  ><i class="fa fa-trash-o"></i> </button>
+                                          <a href="{{route('edit.category',$cat->id)}}" class="btn btn-add btn-sm" data-target=""><i class="fa fa-pencil"></i></a>
+                                          <button class="deleteCat" data-id="{{ $cat->id }}"  ><i class="fa fa-trash-o"></i> </button>
                                        </td>
                                     </tr>
                                  @endforeach
@@ -123,7 +118,7 @@
 <script>
 $(document).ready( function () {
     $('#list_table').DataTable();
-    $(".ProductStatus").change(function()
+    $(".CategoryStatus").change(function()
 {
  var id=$(this).attr('rel');
  if($(this).prop("checked")==true){
@@ -132,7 +127,7 @@ $(document).ready( function () {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
        },
        type : 'post',
-       url : '/product/status',
+       url : '/category/status',
        data : {status:'1',id:id},
        success:function(data){
           $("#message_success").show();
@@ -148,7 +143,7 @@ $(document).ready( function () {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
        },
        type : 'post',
-       url : '/product/status',
+       url : '/category/status',
        data : {status:'0',id:id},
        success:function(resp){
           $("#message_error").show();
@@ -161,13 +156,13 @@ $(document).ready( function () {
  }
 });
 });
-$(".deleteRecord").click(function(){
+$(".deleteCat").click(function(){
     var id = $(this).data("id");
     var token = $("meta[name='csrf-token']").attr("content");
    
     $.ajax(
     {
-        url: "/delete/product/"+id,
+        url: "/delete/category/"+id,
         type: 'get',
         data: {
             "id": id,

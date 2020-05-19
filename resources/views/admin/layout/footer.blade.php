@@ -41,6 +41,8 @@
       <!-- Dashboard js -->
       <script src="{{asset('backend_assets/dist/js/dashboard.js')}}" type="text/javascript"></script>
       <script type="text/javascript" charset="utf8" src="{{asset('js/datatable.js')}}"></script>
+      <script src="{{asset('js/bootstrap-toggle.js')}}" type="text/javascript"></script>
+      
 
       <!-- End Theme label Script
          =====================================================================-->
@@ -124,6 +126,7 @@
          }
          dash();         
       </script>
+      @include('sweetalert::alert')
    </body>
 </html>
 

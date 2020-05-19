@@ -1,5 +1,5 @@
 @extends('admin.layout.master')
-@section('title','Add Product')
+@section('title','Add Banner')
 @section('content')
    <div class="content-wrapper">
             <!-- Content Header (Page header) -->
@@ -8,8 +8,8 @@
                   <i class="fa fa-product-hunt"></i>
                </div>
                <div class="header-title">
-                  <h1>Add Product</h1>
-                  <small>Product list</small>
+                  <h1>Add Banner</h1>
+                  <small>Banner</small>
                </div>
             </section>
         @if(Session::has('flash_message_error'))
@@ -36,50 +36,41 @@
                      <div class="panel panel-bd lobidrag">
                         <div class="panel-heading">
                            <div class="btn-group" id="buttonlist"> 
-                              <a class="btn btn-add " href="{{route('list.product')}}"> 
-                              <i class="fa fa-product-hunt"></i>  Product List </a>  
+                              <a class="btn btn-add " href="{{route('list.banner')}}"> 
+                              <i class="fa fa-product-hunt"></i>  Banner List </a>  
                            </div>
                         </div> 
                         <div class="panel-body">
-                           <form class="col-sm-6" id="addproform" enctype="multipart/form-data" action="{{route('stores.product')}}" method="post">
+                           <form class="col-sm-6" id="addproform" enctype="multipart/form-data" action="{{route('store.banner')}}" method="post">
                                @csrf
                               <div class="form-group">
-                                 <label>Product Name</label>
-                                 <input type="text" class="form-control" placeholder="Enter Product Name" name="product_name">
+                                 <label>Banner Name</label>
+                                 <input type="text" class="form-control" placeholder="Enter banner Name" name="banner_name">
+                              </div>
+                             
+                              <div class="form-group">
+                                 <label>Text Style</label>
+                                 <input type="text" class="form-control" placeholder="Enter Text Style" name="text_style">
                               </div>
                               <div class="form-group">
-                                 <label>Category</label>
-                                 <select name="category_id" id="category_id" class="form-control">
-                                 <option value="0">Category</option>
-                                 @foreach($category as $cat)
-                                 <option value="{{$cat->id}}">{{$cat->name}}</option>
-                                 @endforeach
-                                 </select>
+                                 <label>Link</label>
+                                 <input type="text" class="form-control" placeholder="Banner Link"  name="banner_link">
                               </div>
                               <div class="form-group">
-                                 <label>Product Code</label>
-                                 <input type="text" class="form-control" placeholder="Enter Product Code" name="product_code">
-                              </div>
-                              <div class="form-group">
-                                 <label>Product Color</label>
-                                 <input type="text" class="form-control" placeholder="Product Color"  name="product_color">
-                              </div>
-                              <div class="form-group">
-                                 <label>Product Price</label>
-                                 <input type="number" class="form-control" placeholder="Enter Product Price" name="product_price">
+                                 <label>Sort Order</label>
+                                 <input type="text" class="form-control" placeholder="Enter Sort Order" name="sort_order">
                               </div>
                               <div class="form-group">
                                  <label>Picture upload</label>
-                                 <input type="file" name="product_image">
-                                 <input type="hidden" name="old_picture">
+                                 <input type="file" name="banner_image">
                               </div>
                               <div class="form-group">
-                                 <label>Product Description</label>
-                                 <textarea class="form-control" rows="3" name="product_description"></textarea>
+                                 <label>Content</label>
+                                 <textarea class="form-control" rows="3" name="banner_content"></textarea>
                               </div>
                               <div class="reset-button">
                                  <a href="#" class="btn btn-warning">Reset</a>
-                                 <input type="submit" class="btn btn-success" value="Add Product">
+                                 <input type="submit" class="btn btn-success" value="Add Banner">
                               </div>
                            </form>
                         </div>

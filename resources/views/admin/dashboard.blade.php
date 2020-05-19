@@ -1,4 +1,5 @@
 @extends('admin.layout.master')
+@section('title','Dashboard')
 @section('content')
 <!-- =============================================== -->
          <!-- Content Wrapper. Contains page content -->

@@ -5,7 +5,8 @@
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>CRM Admin Panel</title>
+      <title>@yield('title') - My Shop</title>
+      <meta name="csrf-token" content="{{csrf_token()}}">
       <!-- Favicon and touch icons -->
       <link rel="shortcut icon" href="{{asset('backend_assets/dist/img/ico/favicon.png')}}" type="image/x-icon">
       <!-- Start Global Mandatory Style
@@ -46,6 +47,8 @@
       <!-- End Theme Layout Style
          =====================================================================-->
       <link rel="stylesheet" type="text/css" href="{{asset('css/datatable.css')}}">
+      <link href="{{asset('css/bootstrap-toggle.css')}}" rel="stylesheet" type="text/css"/>
+      
    </head>
    <body class="hold-transition sidebar-mini">
       <!--preloader-->

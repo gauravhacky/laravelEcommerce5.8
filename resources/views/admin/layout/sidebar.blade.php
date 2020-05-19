@@ -32,9 +32,20 @@
                      </span>
                      </a>
                      <ul class="treeview-menu">
-                        <li><a href="deposit.html">Add</a></li>
-                        <li><a href="expense.html">List</a></li>
-                        <li><a href="group.html">Edit</a></li>
+                        <li><a href="{{route('add.category')}}">Add</a></li>
+                        <li><a href="{{route('list.category')}}">List</a></li>
+                     </ul>
+                  </li>
+                  <li class="treeview">
+                     <a href="#">
+                     <i class="fa fa-shopping-basket"></i><span>Banners</span>
+                     <span class="pull-right-container">
+                     <i class="fa fa-angle-left pull-right"></i>
+                     </span>
+                     </a>
+                     <ul class="treeview-menu">
+                        <li><a href="{{route('add.banner')}}">Add</a></li>
+                        <li><a href="{{route('list.banner')}}">List</a></li>
                      </ul>
                   </li>
                   <li class="treeview">

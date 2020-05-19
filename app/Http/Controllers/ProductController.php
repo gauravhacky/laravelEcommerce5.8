@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use RealRashid\SweetAlert\Facades\Alert;
+use Auth;
+use Session;
 use Image;
 use App\Product;
+use App\Category;
 
 class ProductController extends Controller
 {
@@ -18,13 +22,15 @@ class ProductController extends Controller
 
         public function addproduct()
         {
-        return view('admin.products.add');
+        $category=Category::where(['parent_id'=>0])->get();
+        return view('admin.products.add',compact('category'));
         }
 
         public function storeproduct(Request $request)
         {
                 $products = new Product();
                 $products->name = $request->product_name;
+                $products->category_id = $request->category_id;
                 $products->code = $request->product_code;
                 $products->color = $request->product_color;
                 $products->price = $request->product_price;
@@ -49,19 +55,22 @@ class ProductController extends Controller
                 }
         }
                 $products->save();
+                Alert::success('Product added Successfully','Success Message');
                 return redirect()->route('add.product')->with('flash_message_success','Product Successfully Saved');
         }
 
         public function editproduct($id)
         {
                 $product=Product::find($id);
-                return view('admin.products.edit',compact('product'));
+                $category=Category::where(['parent_id'=>0])->get();
+                return view('admin.products.edit',compact('product','category'));
         }
 
         public function updateproduct(Request $request,$id)
         {       
                 $products = Product::find($id);
                 $products->name = $request->product_name;
+                $products->category_id = $request->category_id;
                 $products->code = $request->product_code;
                 $products->color = $request->product_color;
                 $products->price = $request->product_price;
@@ -90,11 +99,22 @@ class ProductController extends Controller
                 }
                 $products->image=$filename;
                 $products->save();
+                Alert::success('Product updated Successfully','Success Message');
                 return redirect()->route('list.product')->with('flash_message_success','Product Successfully Updated');
+        }
+
+        public function updateStatus(Request $request)
+        {
+               $data=$request->all();
+               Product::where('id',$data['id'])->update(['status'=>$data['status']]);
         }
 
         public function deleteproduct($id)
         {
-                
-        }
+                Product::find($id)->delete($id);
+                return response()->json([
+                        'success' => 'Record deleted successfully!'
+                ]);
+                }   
+        
 }

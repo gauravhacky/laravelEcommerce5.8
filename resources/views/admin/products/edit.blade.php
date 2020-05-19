@@ -1,4 +1,5 @@
 @extends('admin.layout.master')
+@section('title','Edit Product')
 @section('content')
    <div class="content-wrapper">
             <!-- Content Header (Page header) -->
@@ -21,7 +22,7 @@
                         <div class="panel-heading">
                            <div class="btn-group" id="buttonlist"> 
                               <a class="btn btn-add " href="{{route('list.product')}}"> 
-                              <i class="fa fa-product-hunt"></i>  Product Edit </a>  
+                              <i class="fa fa-product-hunt"></i>  Product List </a>  
                            </div>
                         </div> 
                         <div class="panel-body">
@@ -30,6 +31,15 @@
                               <div class="form-group">
                                  <label>Product Name</label>
                                  <input type="text" class="form-control" placeholder="Enter Product Name" name="product_name" value="{{$product->name}}">
+                              </div>
+                              <div class="form-group">
+                                 <label>Category</label>
+                                 <select name="category_id" id="category_id" class="form-control">
+                                 <option value="0">Category</option>
+                                 @foreach($category as $cat)
+                                 <option value="{{$cat->id}}" {{$product->category_id == $cat->id ? 'selected' : ''}}>{{$cat->name}}</option>
+                                 @endforeach
+                                 </select>
                               </div>
                               <div class="form-group">
                                  <label>Product Code</label>
