@@ -1,3 +1,5 @@
+This is a complete laravel e-commerce application, where admin can manage the products or manage categories and price, in front-end user can search product according to categories and add to card and also purchase through secure payment gateway. Technologies: Laravel5.8,JavaSript,Bootstrap4,Css3,Ajax,Html5. Admin url: http://127.0.0.1:8000/admin         After installation of this project please Run: php artisan db:seed      after this command you can login in your admin panel: username:gaurav@yopmail.com Pass:12345678     you can change your seeder according your data seeder name is adminTableSeeder
+
 <p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
 
 <p align="center">
