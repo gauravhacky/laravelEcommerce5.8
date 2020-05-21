@@ -11,10 +11,10 @@
         <!-- Favicon and touch icons -->
         <link rel="shortcut icon" href="assets/dist/img/ico/favicon.png" type="image/x-icon">
         <!-- Bootstrap -->
-        <link href="{{('backend_assets/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>
-        <link href="{{('backend_assets/pe-icon-7-stroke/css/pe-icon-7-stroke.css')}}" rel="stylesheet" type="text/css"/>
+        <link href="{{asset('backend_assets/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>
+        <link href="{{asset('backend_assets/pe-icon-7-stroke/css/pe-icon-7-stroke.css')}}" rel="stylesheet" type="text/css"/>
         <!-- style css -->
-        <link href="{{('backend_assets/dist/css/stylecrm.css')}}" rel="stylesheet" type="text/css"/>
+        <link href="{{asset('backend_assets/dist/css/stylecrm.css')}}" rel="stylesheet" type="text/css"/>
      </head>
     <body>
         <div class="container-center">
@@ -72,8 +72,8 @@
         </div>
         <!-- /.content-wrapper -->
         <!-- jQuery -->
-        <script src="{{('backend_assets/plugins/jQuery/jquery-1.12.4.min.js')}}" type="text/javascript"></script>
+        <script src="{{asset('backend_assets/plugins/jQuery/jquery-1.12.4.min.js')}}" type="text/javascript"></script>
         <!-- bootstrap js -->
-        <script src="{{('backend_assets/bootstrap/js/bootstrap.min.js')}}" type="text/javascript"></script>
+        <script src="{{asset('backend_assets/bootstrap/js/bootstrap.min.js')}}" type="text/javascript"></script>
     </body>
 </html>

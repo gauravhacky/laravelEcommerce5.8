@@ -23,4 +23,9 @@ class IndexController extends Controller
         $productDetails = Product::find($id);
         return view('shop.product_details',compact('productDetails'));
     }
+
+    public function dynamicFields()
+    {
+        return view('shop.dynamicfields');
+    }
 }

@@ -104,6 +104,7 @@
                                        </td>
                                        <td>
                                           <a href="{{route('edit.product',$product->id)}}" class="btn btn-add btn-sm" data-target=""><i class="fa fa-pencil"></i></a>
+                                          <a href="{{route('addAttribute.product',$product->id)}}" class="btn btn-add btn-sm" data-target=""><i class="fa fa-list"></i></a>
                                           <button class="deleteRecord" data-id="{{ $product->id }}"  ><i class="fa fa-trash-o"></i> </button>
                                        </td>
                                     </tr>

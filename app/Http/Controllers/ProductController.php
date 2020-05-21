@@ -109,6 +109,12 @@ class ProductController extends Controller
                Product::where('id',$data['id'])->update(['status'=>$data['status']]);
         }
 
+        public function addAttribute(Request $request,$id)
+        {
+                $product=Product::find($id);
+                return view('admin.products.add_attribute',compact('product'));
+        }
+
         public function deleteproduct($id)
         {
                 Product::find($id)->delete($id);

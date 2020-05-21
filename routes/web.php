@@ -16,6 +16,7 @@
 // });
 Route::match(['get','post'],'/','IndexController@index');
 Route::get('product/details/{id}','IndexController@productDetail')->name('product.details');
+Route::get('dynamic/fields/','IndexController@dynamicFields')->name('dynamic.fields');
 Route::match(['get','post'],'/admin','AdminController@login');
 
 Auth::routes();
@@ -40,6 +41,8 @@ Route::get('edit/product/{id}','ProductController@editproduct')->name('edit.prod
 Route::post('edit/product/{id}','ProductController@updateproduct')->name('update.product');
 Route::get('delete/product/{id}','ProductController@deleteproduct')->name('delete.product');
 Route::post('/product/status','ProductController@updateStatus')->name('update.status');
+#Product Attribute
+Route::get('add/attribute/{id}','ProductController@addAttribute')->name('addAttribute.product');
 #Banner Routes
 Route::get('/list/banners','ManageBannerController@bannerList')->name('list.banner');
 Route::get('/add/banner','ManageBannerController@addBanner')->name('add.banner');

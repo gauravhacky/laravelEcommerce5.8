@@ -19,7 +19,7 @@ class CreateCategoriesTable extends Migration
             $table->string('name');
             $table->string('url');
             $table->longText('description');
-            $table->integer('status');
+            $table->integer('status')->default(1);
             $table->softDeletes();
             $table->timestamps();
         });
