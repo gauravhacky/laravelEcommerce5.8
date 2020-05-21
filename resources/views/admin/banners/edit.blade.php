@@ -5,7 +5,7 @@
             <!-- Content Header (Page header) -->
             <section class="content-header">
                <div class="header-icon">
-                  <i class="fa fa-product-hunt"></i>
+                  <i class="fa fa-eye"></i>
                </div>
                <div class="header-title">
                   <h1>Edit Banner</h1>
@@ -37,7 +37,7 @@
                         <div class="panel-heading">
                            <div class="btn-group" id="buttonlist"> 
                               <a class="btn btn-add " href="{{route('list.banner')}}"> 
-                              <i class="fa fa-product-hunt"></i>Banner List</a>  
+                              <i class="fa fa-eye"></i>Banner List</a>  
                            </div>
                         </div> 
                         <div class="panel-body">
@@ -62,10 +62,10 @@
                               </div>
                               <div class="form-group">
                                  <label>Picture upload</label>
-                                 <input type="file" name="banner_image">
+                                 <input type="file" name="banner_image"><br/>
                                  <input type="hidden" name="current_image" value="{{$banner->image}}">
                                  @if(!empty($banner->image))
-                                 <img src="{{asset('uploads/banners/'.$banner->image) }}" class="img-circle"  alt="User Image" width="50" height="50">
+                                 <img src="{{asset('uploads/banners/'.$banner->image) }}" class="img-square"  alt="Banner Image" width="250" height="110">
                                  @endif
                               </div>
                               <div class="form-group">

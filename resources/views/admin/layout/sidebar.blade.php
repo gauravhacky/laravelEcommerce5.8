@@ -38,7 +38,7 @@
                   </li>
                   <li class="treeview">
                      <a href="#">
-                     <i class="fa fa-shopping-basket"></i><span>Banners</span>
+                     <i class="fa fa-eye"></i><span>Banners</span>
                      <span class="pull-right-container">
                      <i class="fa fa-angle-left pull-right"></i>
                      </span>

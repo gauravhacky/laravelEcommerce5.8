@@ -40,7 +40,7 @@ class ManageBannerController extends Controller
                         $extension=$img_tmp->getClientOriginalExtension();
                         $filename=rand(111,99999).'.'.$extension;
                         $img_path='uploads/banners/'.$filename;
-                        Image::make($img_tmp)->resize(500,500)->save($img_path);
+                        Image::make($img_tmp)->resize(1920,1000)->save($img_path);
                         $banner->image=$filename;
 
                 }

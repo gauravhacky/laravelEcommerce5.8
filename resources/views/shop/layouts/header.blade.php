@@ -20,14 +20,14 @@
     <link rel="apple-touch-icon" href="{{('front_assets/images/apple-touch-icon.png')}}">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{{('front_assets/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('front_assets/css/bootstrap.min.css')}}">
     <!-- Site CSS -->
-    <link rel="stylesheet" href="{{('front_assets/css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('front_assets/css/style.css')}}">
     <!-- Responsive CSS -->
-    <link rel="stylesheet" href="{{('front_assets/css/responsive.css')}}">
+    <link rel="stylesheet" href="{{asset('front_assets/css/responsive.css')}}">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{('front_assets/css/custom.css')}}">
-    <link rel="stylesheet" href="{{('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')}}">
+    <link rel="stylesheet" href="{{asset('front_assets/css/custom.css')}}">
+    <link rel="stylesheet" href="{{asset('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')}}">
 
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -105,7 +105,7 @@
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                    <a class="navbar-brand" href="index.html"><img src="{{('front_assets/images/logo.png')}}" class="logo" alt=""></a>
+                    <a class="navbar-brand" href="index.html"><img src="{{asset('front_assets/images/logo.png')}}" class="logo" alt=""></a>
                 </div>
                 <!-- End Header Navigation -->
 
@@ -205,17 +205,17 @@
                 <li class="cart-box">
                     <ul class="cart-list">
                         <li>
-                            <a href="#" class="photo"><img src="{{('front_assets/images/img-pro-01.jpg')}}" class="cart-thumb" alt="" /></a>
+                            <a href="#" class="photo"><img src="{{asset('front_assets/images/img-pro-01.jpg')}}" class="cart-thumb" alt="" /></a>
                             <h6><a href="#">Delica omtantur </a></h6>
                             <p>1x - <span class="price">$80.00</span></p>
                         </li>
                         <li>
-                            <a href="#" class="photo"><img src="{{('front_assets/images/img-pro-02.jpg')}}" class="cart-thumb" alt="" /></a>
+                            <a href="#" class="photo"><img src="{{asset('front_assets/images/img-pro-02.jpg')}}" class="cart-thumb" alt="" /></a>
                             <h6><a href="#">Omnes ocurreret</a></h6>
                             <p>1x - <span class="price">$60.00</span></p>
                         </li>
                         <li>
-                            <a href="#" class="photo"><img src="{{('front_assets/images/img-pro-03.jpg')}}" class="cart-thumb" alt="" /></a>
+                            <a href="#" class="photo"><img src="{{asset('front_assets/images/img-pro-03.jpg')}}" class="cart-thumb" alt="" /></a>
                             <h6><a href="#">Agam facilisis</a></h6>
                             <p>1x - <span class="price">$40.00</span></p>
                         </li>

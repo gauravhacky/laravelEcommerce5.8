@@ -15,6 +15,7 @@
 //     return view('welcome');
 // });
 Route::match(['get','post'],'/','IndexController@index');
+Route::get('product/details/{id}','IndexController@productDetail')->name('product.details');
 Route::match(['get','post'],'/admin','AdminController@login');
 
 Auth::routes();
@@ -47,6 +48,6 @@ Route::get('/edit/banner/{id}','ManageBannerController@editBanner')->name('edit.
 Route::post('/update/banner/{id}','ManageBannerController@updateBanner')->name('update.banner');
 Route::post('/store/banner','ManageBannerController@storeBanner')->name('store.banner');
 Route::post('/banner/status','ManageBannerController@updateBannerStatus')->name('update.Bannerstatus');
-Route::get('/delete/banner/{id}','ManageBannerController@deleteBanner')->name('delete.Banner');
+Route::get('delete/banner/{id}','ManageBannerController@deleteBanner')->name('delete.Banner');
 }); 
 Route::get('/logout','AdminController@logout');
