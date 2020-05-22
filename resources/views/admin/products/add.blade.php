@@ -119,4 +119,3 @@ $('#addproform').validate({ // initialize the plugin
 });
 </script>
 @endsection
-

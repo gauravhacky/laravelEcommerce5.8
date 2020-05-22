@@ -42,7 +42,8 @@ Route::post('edit/product/{id}','ProductController@updateproduct')->name('update
 Route::get('delete/product/{id}','ProductController@deleteproduct')->name('delete.product');
 Route::post('/product/status','ProductController@updateStatus')->name('update.status');
 #Product Attribute
-Route::get('add/attribute/{id}','ProductController@addAttribute')->name('addAttribute.product');
+Route::get('/add/attribute/{id}','ProductController@addAttribute')->name('addAttribute.product');  
+Route::post('store/attribute/{id}','ProductController@addAttributeStore')->name('addAttributeStore.product');
 #Banner Routes
 Route::get('/list/banners','ManageBannerController@bannerList')->name('list.banner');
 Route::get('/add/banner','ManageBannerController@addBanner')->name('add.banner');

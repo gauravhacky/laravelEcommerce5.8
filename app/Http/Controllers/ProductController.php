@@ -9,7 +9,8 @@ use Auth;
 use Session;
 use Image;
 use App\Product;
-use App\Category;
+use App\Category; 
+use App\ProductAttribute;
 
 class ProductController extends Controller
 {
@@ -113,6 +114,39 @@ class ProductController extends Controller
         {
                 $product=Product::find($id);
                 return view('admin.products.add_attribute',compact('product'));
+        }
+
+        public function addAttributeStore(Request $request,$id)
+        {
+                $data = $request->all();
+                foreach($data['sku'] as $key=>$val)
+                {
+                        if(!empty($val))   //Prevent duplicate SKU Record
+                        { 
+                        $attrCountSku = ProductAttribute::where('sku',$val)->count();
+                        if($attrCountSku>0)
+                        {
+                        return redirect('/add/attribute/'.$id)->with('flash_message_error','Sku is Allready Exists please select another sku');
+                        }              
+                        $attrCountSizes = ProductAttribute::where(['product_id'=>$id,'size'=>$data['size']
+                        [$key]])->count();  //Prevent dupicate Size
+                        if($attrCountSizes>0)
+                        {
+                                return redirect('/add/attribute/'.$id)->with('flash_message_error',''.$data['size'][$key].'size is allready exists');
+
+                        }
+                        $attribute= new ProductAttribute;
+                        $attribute->product_id=$id;
+                        $attribute->sku=$val;
+                        $attribute->size = $data['size'][$key];
+                        $attribute->price = $data['price'][$key];
+                        $attribute->stock = $data['stock'][$key];
+                        $attribute->save();
+
+                }
+               
+        }
+        return redirect('/add/attribute/'.$id)->with('flash_message_success','Product attributes uploaded successfully.');
         }
 
         public function deleteproduct($id)

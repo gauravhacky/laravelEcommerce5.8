@@ -41,7 +41,7 @@
                            </div>
                         </div> 
                         <div class="panel-body">
-                           <form class="col-sm-6" id="addproform" enctype="multipart/form-data" action="" method="post">
+                           <form class="col-sm-6" action="{{route('addAttributeStore.product',$product->id)}}" id="addproform" enctype="multipart/form-data" action="" method="post">
                                @csrf
                               <div class="form-group">
                                  <label>Product Name</label>
