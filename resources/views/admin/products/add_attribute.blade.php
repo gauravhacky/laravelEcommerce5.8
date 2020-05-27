@@ -1,7 +1,7 @@
 @extends('admin.layout.master')
 @section('title','Add Attribute')
 @section('content')
-   <div class="content-wrapper">
+ <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header">
                <div class="header-icon">
@@ -79,6 +79,67 @@
                   </div>
                </div>
             </section>
+            <section class="content">
+               <div class="row">
+                  <div class="col-sm-12">
+                     <div class="panel panel-bd lobidrag">
+                        <div class="panel-heading">
+                           <div class="btn-group" id="buttonexport">
+                              <a href="">
+                                 <h4>Attributes</h4>
+                              </a>
+                           </div>
+                        </div>
+                        <div class="panel-body">
+                        <!-- Plugin content:powerpoint,txt,pdf,png,word,xl -->
+                           <div class="btn-group">
+                              <div class="buttonexport" id="buttonlist"> 
+                                 <a class="btn btn-add" href="{{route('add.product')}}"> <i class="fa fa-plus"></i> Add Product
+                                 </a>  
+                              </div>
+                           </div>
+                           <!-- Plugin content:powerpoint,txt,pdf,png,word,xl -->
+                           <div class="table-responsive">
+                              <table id="list_table" class="table table-bordered table-striped table-hover">
+                              <form enctype="multipart/form-data" method="post" action="{{route('addAttributeedit.product', $product->id)}}">
+                                 @csrf
+                                 <thead>
+                                    <tr class="info">
+                                       <th>Category ID</th>
+                                       <th>Product Id</th>
+                                       <th>SKU</th>
+                                       <th>Size</th>
+                                       <th>Price</th>
+                                       <th>Stock</th>
+                                       <th>Action</th>
+                                    </tr>
+                                 </thead>
+                                 <tbody>
+                                @foreach($product['attributes'] as $attribute)
+                                    <tr>
+                                    <td style="display:none;"><input type="hidden" name="attr[]" value="{{$attribute->id}}">{{$attribute->id}}</td>
+                                    <td>{{ $attribute->id }}</td>
+                                       <td>{{ $attribute->product_id }}</td>
+                                       <td><input type="text" name="sku[]" value="{{ $attribute->sku }}"></td>
+                                       <td><input type="text" name="size[]" value="{{ $attribute->size }}"></td>
+                                       <td><input type="text" name="price[]" value="{{ $attribute->price }}"></td>
+                                       <td><input type="text" name="stock[]" value="{{ $attribute->stock }}"></td>
+                                      <td>
+                                          <input type="submit" value="update">
+                                          <button class="deleteattrRecord" data-id="{{ $attribute->id }}"  ><i class="fa fa-trash-o"></i> </button>
+                                       </td>
+                                    </tr>
+                               
+                                 @endforeach
+                                 </tbody>
+                              </table>
+                           </form>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </section>
             <!-- /.content -->
          </div>
 @endsection
@@ -106,6 +167,26 @@ $(document).ready(function(){
         $(this).parent('div').remove(); //Remove field html
         x--; //Decrement field counter
     });
+});
+$(".deleteattrRecord").click(function(){
+    var id = $(this).data("id");
+    var token = $("meta[name='csrf-token']").attr("content");
+   
+    $.ajax(
+    {
+        url: "/delete/attribute/"+id,
+        type: 'get',
+        data: {
+            "id": id,
+            "_token": token,
+        },
+        
+        success: function (){
+           
+        }
+        
+    });
+   
 });
 </script>
 @endsection

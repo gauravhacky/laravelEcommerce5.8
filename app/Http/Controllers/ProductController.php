@@ -112,7 +112,7 @@ class ProductController extends Controller
 
         public function addAttribute(Request $request,$id)
         {
-                $product=Product::find($id);
+                $product=Product::with('attributes')->where(['id'=>$id])->first();
                 return view('admin.products.add_attribute',compact('product'));
         }
 
@@ -149,12 +149,35 @@ class ProductController extends Controller
         return redirect('/add/attribute/'.$id)->with('flash_message_success','Product attributes uploaded successfully.');
         }
 
+
+        public function editAttributeedit(Request $request,$id)
+        {
+                $data = $request->all();
+                foreach($data['attr'] as $key=>$attr)
+                {
+                        ProductAttribute::where(['id'=>$data['attr'][$key]])->update(['sku'=>$data['sku'][$key],
+                        'size'=>$data['size'][$key],'price'=>$data['price'][$key],'stock'=>$data['stock'][$key]]);
+                }
+                return redirect()->back()->with('flash_message_success','Products Attributes Updated');
+              
+              
+
+        }
+
         public function deleteproduct($id)
         {
                 Product::find($id)->delete($id);
                 return response()->json([
                         'success' => 'Record deleted successfully!'
                 ]);
-                }   
+        }   
+
+        public function deleteAttributeStore($id)
+        {
+                ProductAttribute::find($id)->delete($id);   
+                return response()->json([
+                        'success' => 'Record deleted successfully!'
+                ]);
+        }
         
 }
