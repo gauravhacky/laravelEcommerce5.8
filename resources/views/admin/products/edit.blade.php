@@ -33,7 +33,7 @@
                                  <input type="text" class="form-control" placeholder="Enter Product Name" name="product_name" value="{{$product->name}}">
                               </div>
                               <div class="form-group">
-                                 <label>Category</label>
+                                 <label>Under Category</label>
                                  <select name="category_id" id="category_id" class="form-control">
                                  <option value="0">Category</option>
                                  @foreach($category as $cat)

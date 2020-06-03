@@ -11,6 +11,7 @@ use Image;
 use App\Product;
 use App\Category; 
 use App\ProductAttribute;
+use App\ProductImage;
 
 class ProductController extends Controller
 {
@@ -110,6 +111,12 @@ class ProductController extends Controller
                Product::where('id',$data['id'])->update(['status'=>$data['status']]);
         }
 
+        public function updateFeaturedStatus(Request $request)
+        {
+                $data=$request->all();
+                Product::where('id',$data['id'])->update(['featured_products'=>$data['featured_products']]); 
+        }
+
         public function addAttribute(Request $request,$id)
         {
                 $product=Product::with('attributes')->where(['id'=>$id])->first();
@@ -159,8 +166,34 @@ class ProductController extends Controller
                         'size'=>$data['size'][$key],'price'=>$data['price'][$key],'stock'=>$data['stock'][$key]]);
                 }
                 return redirect()->back()->with('flash_message_success','Products Attributes Updated');
-              
-              
+        }
+
+        public function addimages($id)
+        {
+                $product = Product::where('id',$id)->first();
+                $productImages = ProductImage::where('product_id',$id)->get();
+                return view('admin.products.add_images',compact('product','productImages'));
+        }
+
+        public function storeimages(Request $request,$id)
+        {       
+                $product_id = $request->id;
+                if($request->hasfile('images'))
+                {       
+                       $files = $request->file('images');
+                        foreach($files as $file)
+                        {
+                                $image = new ProductImage;
+                                $extension = $file->getClientOriginalExtension();
+                                $filename=rand(111,9999).'.'.$extension;
+                                $image_path='uploads/products/'.$filename;
+                                Image::make($file)->save($image_path);
+                                $image->images=$filename;
+                                $image->product_id =$product_id;
+                                $image->save();
+                        }
+                }
+                return redirect()->back()->with('flash_message_success','Products Images Added Successfully');
 
         }
 
@@ -178,6 +211,19 @@ class ProductController extends Controller
                 return response()->json([
                         'success' => 'Record deleted successfully!'
                 ]);
+        }
+
+        public function deleteproductImg($id)
+        {
+                $product_images=ProductImage::where(['id'=>$id])->first();
+                //dd($product_images);
+                $image_path = 'uploads/products/';
+                if(file_exists($image_path.$product_images->images))
+                {
+                        ProductImage::where(['id'=>$id])->delete();
+                        Alert::success('Deleted','Success Message');
+                        return redirect()->back();
+                }
         }
         
 }

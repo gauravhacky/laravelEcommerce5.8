@@ -1,6 +1,6 @@
 @include('shop.layouts.header')
 @yield('content')
-<body>
+
 <!-- End copyright  -->
     @include('shop.layouts.footer')
     <a href="#" id="back-to-top" title="Back to top" style="display: none;">&uarr;</a>
@@ -22,6 +22,3 @@
     <script src="{{asset('front_assets/js/contact-form-script.js')}}"></script>
     <script src="{{asset('front_assets/js/custom.js')}}"></script>
     @yield('js')
-</body>
-
-</html>

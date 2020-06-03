@@ -41,7 +41,7 @@
                            </div>
                         </div> 
                         <div class="panel-body">
-                           <form class="col-sm-6" id="addcatform"  action="{{route('update.category',$category->id)}}" method="post">
+                           <form class="col-sm-6" id="addcatform"  action="{{route('update.categories',$category->id)}}" method="post">
                                @csrf
                               <div class="form-group">
                                  <label>Category Name</label>

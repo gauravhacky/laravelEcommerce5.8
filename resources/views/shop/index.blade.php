@@ -53,7 +53,7 @@
                                     <div class="collapse show" id="{{ $cat->id }}" data-parent="#list-group-men">
                                         <div class="list-group">
                                         @foreach($cat->categories as $subcat)
-                                            <a href="{{$subcat->url}}" class="list-group-item list-group-item-action active">{{$subcat->name}} </a>
+                                            <a href="{{route('category.details',$subcat->id)}}" class="list-group-item list-group-item-action active">{{$subcat->name}} </a>
                                             @endforeach
                                         </div>
                                     </div>
@@ -97,14 +97,14 @@
                                                             <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
                                                             <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
                                                         </ul>
-                                                        <a class="cart" href="{{route('product.details',base64_encode($product->id))}}">Product Details</a>
+                                                        <a class="cart" href="{{route('product.details',$product->id)}}">Product Details</a>
                                                     </div>
                                                 </div>
                                                 <div class="why-text">
                                                     <h4>{{$product->description}}</h4>
                                                     <h5> {{$product->price}}</h5>
                                                 </div>
-                                            </div>
+                                            </div> 
                                         </div>
                                         @endforeach
                                     </div>

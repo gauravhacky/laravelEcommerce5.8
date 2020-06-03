@@ -79,8 +79,9 @@
                                        <th>Color</th>
                                        <th>Price</th>
                                        <th>Description</th>
-                                       <th>Added At</th>
+                                       {{-- <th>Added At</th> --}}
                                        <th>Status</th>
+                                       <th>Featured Product</th>
                                        <th>Action</th>
                                     </tr>
                                  </thead>
@@ -88,29 +89,33 @@
                                  @foreach($products as $key => $product)
                                     <tr>
                                        <td><img src="{{ URL::asset('uploads/products/'.$product->image) }}" class="img-circle" alt="User Image" width="50" height="50"> </td>
-                                       <td>{{ $product->name}}</td>
+                                       <td>{{ $product->name }}</td>
                                        <td>{{ $product->category_id }}</td>
                                        <td>{{ $product->code }}</td>
                                        <td>{{ $product->color }}</td>
                                        <td>{{ $product->price }}</td>
                                        <td>{{ $product->description }}</td>
-                                       <td>{{ date('d-m-y', strtotime($product->created_at)) }}
-                                       </td>
+                                      {{-- <td>{{ date('d-m-y', strtotime($product->created_at)) }}
+                                       </td> --}}
                                        <td>
                                       <input type="checkbox" class="ProductStatus btn btn-success" rel="{{$product->id}}" data-toggle="toggle" data-on="Enabled" data-off="Disabled" data-onstyle="success" data-offstyle="danger"
                                       @if($product->status=="1") checked @endif>
                                       <div id="myElem" style="display:none;" class="alert alert-success">Status Enabled</div>
-                                       
                                        </td>
                                        <td>
-                                          <a href="{{route('edit.product',$product->id)}}" class="btn btn-add btn-sm" data-target=""><i class="fa fa-pencil"></i></a>
-                                          <a href="{{route('addAttribute.product',$product->id)}}" class="btn btn-add btn-sm" data-target=""><i class="fa fa-list"></i></a>
+                                          <input type="checkbox" class="featuredProductStatus btn btn-success" rel="{{$product->id}}" data-toggle="toggle" data-on="Enabled" data-off="Disabled" data-onstyle="success" data-offstyle="danger"
+                                          @if($product->featured_products=="1") checked @endif>
+                                          <div id="myElem" style="display:none;" class="alert alert-success">Status Enabled</div>
+                                           </td>
+                                       <td>
+                                          <a href="{{route('addAttributimages.product',$product->id)}}" class="btn btn-add btn-sm" title="Add Images" data-target=""><i class="fa fa-image"></i></a>
+                                          <a href="{{route('edit.product',$product->id)}}" class="btn btn-add btn-sm" title="Edit Product" data-target=""><i class="fa fa-pencil"></i></a>
+                                          <a href="{{route('addAttribute.product',$product->id)}}" class="btn btn-add btn-sm" title="Add Attributes" data-target=""><i class="fa fa-list"></i></a>
                                           <button class="deleteRecord" data-id="{{ $product->id }}"  ><i class="fa fa-trash-o"></i> </button>
                                        </td>
                                     </tr>
                                  @endforeach
-                                 
-                                 </tbody>
+                              </tbody>
                               </table>
                            </div>
                         </div>
@@ -162,6 +167,7 @@ $(document).ready( function () {
  }
 });
 });
+
 $(".deleteRecord").click(function(){
     var id = $(this).data("id");
     var token = $("meta[name='csrf-token']").attr("content");
@@ -183,6 +189,43 @@ $(".deleteRecord").click(function(){
    
 });
 
+$(".featuredProductStatus").change(function()
+{
+ var id=$(this).attr('rel');
+ if($(this).prop("checked")==true){
+    $.ajax({
+       headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+       },
+       type : 'post',
+       url : '/featuredproduct/status',
+       data : {featured_products:'1',id:id},
+       success:function(data){
+          $("#message_success").show();
+          setTimeout(function(){
+             $("#message_success").fadeOut('slow'); },2000);
+       },error:function(){
+          alert("error");
+       }
+    });
+ }else{ 
+   $.ajax({
+       headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+       },
+       type : 'post',
+       url : '/featuredproduct/status',
+       data : {featured_products:'0',id:id},
+       success:function(resp){
+          $("#message_error").show();
+          setTimeout(function(){
+             $("#message_error").fadeOut('slow'); },2000);
+       },error:function(){
+          alert("error");
+       }
+    });
+ }
+});
 
 </script>
 @endsection
