@@ -42,6 +42,7 @@
       <script src="{{asset('backend_assets/dist/js/dashboard.js')}}" type="text/javascript"></script>
       <script type="text/javascript" charset="utf8" src="{{asset('js/datatable.js')}}"></script>
       <script src="{{asset('js/bootstrap-toggle.js')}}" type="text/javascript"></script>
+      {{-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> --}}
       
 
       <!-- End Theme label Script

@@ -50,6 +50,18 @@
                   </li>
                   <li class="treeview">
                      <a href="#">
+                     <i class="fa fa-gift"></i><span>Coupon</span>
+                     <span class="pull-right-container">
+                     <i class="fa fa-angle-left pull-right"></i>
+                     </span>
+                     </a>
+                     <ul class="treeview-menu">
+                        <li><a href="{{route('get.coupon')}}">Add</a></li>
+                        <li><a href="{{route('list.coupon')}}">List</a></li>
+                     </ul>
+                  </li>
+                  <li class="treeview">
+                     <a href="#">
                      <i class="fa fa-shopping-cart"></i><span>Sales</span>
                      <span class="pull-right-container">
                      <i class="fa fa-angle-left pull-right"></i>

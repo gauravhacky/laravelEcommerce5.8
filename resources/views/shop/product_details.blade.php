@@ -62,7 +62,7 @@
                     </div>
                 </div>
                 <div class="col-xl-7 col-lg-7 col-md-6">
-                <form name="addtoCart" method="post" action="{{url('/add-cart')}}">{{csrf_field()}}
+                <form name="addtoCart" method="post" action="{{route('add.cartStore')}}">{{csrf_field()}}
                     <div class="single-product-details">
                     <input type="hidden" value="{{$productDetails->id}}" name="product_id">
                     <input type="hidden" value="{{$productDetails->name}}" name="product_name">
@@ -89,7 +89,7 @@
                                     <li>
                                         <div class="form-group quantity-box">
                                             <label class="control-label">Quantity</label>
-                                            <input class="form-control" name="quantity" value="0" min="0" max="20" type="number">
+                                            <input class="form-control" name="quantity" value="1" min="0" max="20" type="number">
                                         </div>
                                     </li>
                                 </ul>
@@ -140,7 +140,7 @@
                                 </div>
                                 <div class="why-text">
                                     <h4>{{$featuredProduct->name}}</h4>
-                                    <h5>PKR {{$featuredProduct->price}}</h5>
+                                    <h5>INR {{$featuredProduct->price}}</h5>
                                 </div>
                             </div>
                         </div>

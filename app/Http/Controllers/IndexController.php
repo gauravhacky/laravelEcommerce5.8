@@ -39,7 +39,7 @@ class IndexController extends Controller
     public function getProductprice(Request $request)
     {
       $data = $request->all();
-    //   //echo "<pre>"; print_r($data);die;
+       //echo "<pre>"; print_r($data);die;
         $proArr = explode("-",$data['idSize']);
         $proAttr = ProductAttribute::where(['product_id'=>$proArr[0],'size'=>$proArr[1]])->first();
         echo $proAttr->price;

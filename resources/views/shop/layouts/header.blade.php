@@ -28,7 +28,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{asset('front_assets/css/custom.css')}}">
     <link rel="stylesheet" href="{{asset('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')}}">
-
+    @yield('css')
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -74,9 +74,7 @@
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <div class="custom-select-box">
                         <select id="basic" class="selectpicker show-tick form-control" data-placeholder="$ USD">
-						<option>¥ JPY</option>
 						<option>$ USD</option>
-						<option>€ EUR</option>
 					</select>
                     </div>
                     <div class="right-phone-box">
@@ -84,8 +82,8 @@
                     </div>
                     <div class="our-link">
                         <ul>
-                            <li><a href="#">My Account</a></li>
-                            <li><a href="#">Our location</a></li>
+                            <li><a href="#"><i class="fa fa-cart-plus">Cart</i></a></li>
+                            <li><a href="#"><i class="fa fa-user">Login</i></a></li>
                             <li><a href="#">Contact Us</a></li>
                         </ul>
                     </div>
@@ -115,7 +113,6 @@
                         <li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
                         <li class="dropdown megamenu-fw">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Product</a>
                             <ul class="dropdown-menu megamenu-content" role="menu">
                                 <li>
                                     <div class="row">

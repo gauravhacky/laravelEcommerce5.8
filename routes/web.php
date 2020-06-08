@@ -20,6 +20,12 @@ Route::get('categories/{category_id}','IndexController@categoryDetail')->name('c
 Route::get('/get/product-price/','IndexController@getProductprice')->name('product.price');
 Route::get('dynamic/fields/','IndexController@dynamicFields')->name('dynamic.fields');
 Route::match(['get','post'],'/admin','AdminController@login');
+#Add to cart Routes
+Route::get('cart','ProductController@addTocart')->name('add.cart');
+Route::post('add-to-cart-store','ProductController@addTocartStore')->name('add.cartStore');
+Route::get('delete/cart/{id}','ProductController@deleteCartProduct')->name('delete.cart');
+//Update product Quantity
+Route::get('cart/update-quantity/{id}/{quantity}','ProductController@updateCartquantity')->name('update.cartquantity');
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
@@ -61,5 +67,15 @@ Route::post('/update/banner/{id}','ManageBannerController@updateBanner')->name('
 Route::post('/store/banner','ManageBannerController@storeBanner')->name('store.banner');
 Route::post('/banner/status','ManageBannerController@updateBannerStatus')->name('update.Bannerstatus');
 Route::get('delete/banner/{id}','ManageBannerController@deleteBanner')->name('delete.Banner');
+#Coupons Controller
+Route::get('admin/add/coupon','CouponsController@getCoupon')->name('get.coupon');
+Route::get('admin/list/coupon','CouponsController@listCoupon')->name('list.coupon');
+Route::post('admin/coupon/store','CouponsController@storeCoupon')->name('store.coupon'); 
+Route::get('admin/coupon/edit/{id}','CouponsController@editCoupon')->name('edit.coupon'); 
+Route::post('admin/coupon/update{id}','CouponsController@updateCoupon')->name('update.coupon'); 
+Route::post('admin/coupon/status','CouponsController@updateCouponStatus')->name('update.couponstatus');
+Route::get('/delete/coupon/{id}','CouponsController@deleteCouponStatus')->name('delete.coupons');
+
 }); 
+
 Route::get('/logout','AdminController@logout');

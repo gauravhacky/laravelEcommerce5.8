@@ -10,6 +10,7 @@ use Session;
 use Image;
 use App\Product;
 use App\Category; 
+use App\Cart;
 use App\ProductAttribute;
 use App\ProductImage;
 
@@ -225,5 +226,66 @@ class ProductController extends Controller
                         return redirect()->back();
                 }
         }
+
+        public function addTocart()
+        {       
+               
+                $session_id = Session::get('session_id');
+                $usercart = Cart::where('session_id',$session_id)->orderBy('id','desc')->get();
+                //dd($usercart);
+                foreach($usercart as $key=>$products)
+                {
+                        $prodectDetails = Product::where('id',$products->product_id)->first();
+                        $usercart[$key]->image = $prodectDetails->image;
+                }
+                return view('shop.cart',compact('usercart'));
+        }
+
+        public function addTocartStore(Request $request)
+        {
+                $session_id = Session::get('session_id');
+                if(empty($session_id))
+                {
+                        $session_id=str_random(40);
+                        Session::put('session_id',$session_id);
+                }
+                $sizeArr = explode("-",$request['size']);
+                $countProducts = Cart::where(['product_id' => $request['product_id'],'product_name'=>$request->product_name,'size'=>$sizeArr[1],'session_id'=>$session_id])->count();
+               if($countProducts>0)
+                {
+                  return redirect()->route('add.cart')->with('flash_message_error','Products already exist in cart.');       
+                }
+
+                else{
+                        $cart = new Cart();
+                        $cart->product_id = $request->product_id;
+                        $cart->product_name = $request->product_name;
+                        $cart->product_code = $request->product_code;
+                        $cart->product_color = $request->color;
+                        $cart->price = $request->price;
+                        $cart->size = $sizeArr[1];
+                        $cart->quantity = $request->quantity;  
+                        $cart->session_id = $session_id;
+                        $cart->save();
+                }
+        
+        
+        return redirect()->route('add.cart')->with('flash_message_success','Products Added Successfully in Cart');
+        
+        }
+
+        public function deleteCartProduct($id)
+        {
+                Cart::find($id)->delete($id);
+                return redirect()->route('add.cart')->with('flash_message_error','Products deleted Successfully.');
+        }
+
+        public function updateCartquantity($id,$quantity)
+        {
+            Cart::where('id',$id)->increment('quantity',$quantity);  
+            return redirect()->route('add.cart')->with('flash_message_sucess','Products Quanitity updated Successfully.');  
+        }
         
 }
+
+
