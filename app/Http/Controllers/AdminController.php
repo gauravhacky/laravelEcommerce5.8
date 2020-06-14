@@ -14,7 +14,7 @@ class AdminController extends Controller
     if($request->isMethod('post'))
     {
         $data=$request->input();
-        if(Auth::attempt(['email'=>$data['username'],'password'=>$data['password']]))
+        if(Auth::attempt(['email'=>$data['username'],'password'=>$data['password'],'is_admin'=>'1']))
         {
             return redirect('admin/dashboard');
         }

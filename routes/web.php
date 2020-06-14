@@ -24,8 +24,23 @@ Route::match(['get','post'],'/admin','AdminController@login');
 Route::get('cart','ProductController@addTocart')->name('add.cart');
 Route::post('add-to-cart-store','ProductController@addTocartStore')->name('add.cartStore');
 Route::get('delete/cart/{id}','ProductController@deleteCartProduct')->name('delete.cart');
+#Route for Login or Register
+Route::get('login-register','UsersController@userLoginRegister')->name('user.loginregister');
+Route::post('user-register','UsersController@userRegister')->name('user.register');
+Route::post('user-login','UsersController@userLogin')->name('user.Login');
+Route::get('user-logout','UsersController@userLogout')->name('user.logout');
+#Route for middleware after front login
+Route::group(['middleware'=>['FrontuserLogin']],function(){
+Route::get('user-account','UsersController@userAccount')->name('user.account');
+Route::get('change-password','UsersController@changePassword')->name('user.changePass');
+Route::post('change-password-store','UsersController@changePasswordStore')->name('user.changePassStore');
+Route::get('change-adddress','UsersController@changeAddress')->name('user.address');
+Route::post('update-adddress','UsersController@updateAddress')->name('user.updateaddress');
+});
 //Update product Quantity
 Route::get('cart/update-quantity/{id}/{quantity}','ProductController@updateCartquantity')->name('update.cartquantity');
+#Apply Coupon Code
+Route::post('cart/apply-coupon','ProductController@applyCoupon')->name('apply.coupon');
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');

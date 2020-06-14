@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Site Metas -->
-    <title>ThewayShop - Ecommerce Bootstrap 4 HTML Template</title>
+    <title>ThewayShop - @yield('title')</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -82,9 +82,17 @@
                     </div>
                     <div class="our-link">
                         <ul>
-                            <li><a href="#"><i class="fa fa-cart-plus">Cart</i></a></li>
-                            <li><a href="#"><i class="fa fa-user">Login</i></a></li>
-                            <li><a href="#">Contact Us</a></li>
+                        <li><a href="#"><i class="fa fa-cart-plus">Cart</i></a></li>
+                        @if(empty(Auth::check()))
+                        <li><a href="{{route('user.loginregister')}}">
+                        <i class="fa fa-user">Login</i></a></li>
+                        @else
+                        <li><a href="{{route('user.account')}}">
+                            <i class="fa fa-user">Account</i></a></li>
+                        <li><a href="{{route('user.logout')}}"> 
+                                <i class="fa fa-user">Logout</i></a></li>
+                                @endif
+                        <li><a href="#">Contact Us</a></li>
                         </ul>
                     </div>
                 </div>
