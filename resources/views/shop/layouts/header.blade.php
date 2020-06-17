@@ -82,7 +82,7 @@
                     </div>
                     <div class="our-link">
                         <ul>
-                        <li><a href="#"><i class="fa fa-cart-plus">Cart</i></a></li>
+                        <li><a href="{{route('add.cart')}}"><i class="fa fa-cart-plus">Cart</i></a></li>
                         @if(empty(Auth::check()))
                         <li><a href="{{route('user.loginregister')}}">
                         <i class="fa fa-user">Login</i></a></li>

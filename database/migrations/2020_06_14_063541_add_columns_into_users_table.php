@@ -14,12 +14,12 @@ class AddColumnsIntoUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('address')->after('email');
-            $table->string('state')->after('address');
-            $table->string('city')->after('state');
-            $table->string('country')->after('city');
-            $table->string('pincode')->after('country');
-            $table->string('mobile')->after('pincode');
+            $table->string('address')->after('email')->nullable();
+            $table->string('state')->after('address')->nullable();
+            $table->string('city')->after('state')->nullable();
+            $table->string('country')->after('city')->nullable();
+            $table->string('pincode')->after('country')->nullable();
+            $table->string('mobile')->after('pincode')->nullable();
         });
     }
 

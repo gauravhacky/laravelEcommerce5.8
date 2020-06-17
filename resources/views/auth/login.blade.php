@@ -1,73 +1,111 @@
-@extends('layouts.app')
-
+@extends('shop.layouts.master')
+@section('title','login-register')
+@section('css')
+<style>
+    #or{
+       background: #d33b33;
+       border-radius: 40px;
+       color: #ffffff;
+       font-family: 'Roboto', sans-serif;
+       font-size: 16px;
+       height: 50px;
+       line-height: 50px;
+       margin-top:75px;
+       text-align:center;
+    }
+    </style>
+@endsection
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+<div class="contact-box-main">
+     @if(Session::has('flash_message_error'))
+    <div class="alert alert-sm alert-danger alert-block" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+    <span aria-hidden="true">&times; </span>
+    </button>
+    <strong>{!! session('flash_message_error')!!} </strong>
+    </div>
+    @endif
+    @if(Session::has('flash_message_success'))
+    <div class="alert alert-sm alert-success alert-block" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+    <span aria-hidden="true">&times; </span>
+    </button>
+    <strong>{!! session('flash_message_success')!!} </strong>
+    </div>
+    @endif
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 col-sm-12">
+                <div class="contact-form-right">
+                    <h2>New user Signup </h2>
+                <form action="{{route('user.register')}}" id="contactForm registerForm" method="Post">
+                    @csrf
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Your Name" id="name" name="name" required data-error="Please Enter Your Name">
+                                    <div class="help-block with-errors"></div>
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input type="email" class="form-control" placeholder="Your email" id="email" name="email" required data-error="Please Enter Your Email">
+                                    <div class="help-block with-errors"></div>
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input type="password" class="form-control" placeholder="password" id="password" name="password" required data-error="Please Enter Your Password">
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="submit-button text-cener">
+                                    <button class="btn hvr-hover" id="submit" type="submit">Signup</button>
+                                    <div id="msgSubmit" class="h3 text-center hidden"></div>
+                                    <div class="clearfix"></div>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
                         </div>
                     </form>
                 </div>
+                <div class="col-lg-1 col-sm-12" id="or">
+                    OR
+
+                </div>
+                <div class="col-lg-6 col-sm-12">
+                    <div class="contact-form-right">
+                        <h2>Already a Member | Login </h2>
+                    <form action="{{route('user.Login')}}" id="contactForm oginForm" method="post">
+                        @csrf
+                            <div class="row">
+                               <div class="col-md-12">
+                                    <div class="form-group">
+                                        <input type="email" class="form-control" placeholder="Your email" id="email" name="email" required data-error="Please Enter Your Email">
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <input type="password" class="form-control" placeholder="password" id="password" name="password" required data-error="Please Enter Your Password">
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="submit-button text-cener">
+                                        <button class="btn hvr-hover" id="submit" type="submit">Login</button>
+                                        <div id="msgSubmit" class="h3 text-center hidden"></div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
+    </div> 
+</div>           
 @endsection

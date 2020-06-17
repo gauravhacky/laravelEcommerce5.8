@@ -21,7 +21,7 @@ Route::get('/get/product-price/','IndexController@getProductprice')->name('produ
 Route::get('dynamic/fields/','IndexController@dynamicFields')->name('dynamic.fields');
 Route::match(['get','post'],'/admin','AdminController@login');
 #Add to cart Routes
-Route::get('cart','ProductController@addTocart')->name('add.cart');
+Route::get('cart','ProductController@addTocart')->name('add.cart')->middleware('verified');
 Route::post('add-to-cart-store','ProductController@addTocartStore')->name('add.cartStore');
 Route::get('delete/cart/{id}','ProductController@deleteCartProduct')->name('delete.cart');
 #Route for Login or Register
@@ -36,14 +36,17 @@ Route::get('change-password','UsersController@changePassword')->name('user.chang
 Route::post('change-password-store','UsersController@changePasswordStore')->name('user.changePassStore');
 Route::get('change-adddress','UsersController@changeAddress')->name('user.address');
 Route::post('update-adddress','UsersController@updateAddress')->name('user.updateaddress');
+Route::get('checkout','ProductController@checkout')->name('product.checkout');
+Route::post('checkout/store','ProductController@checkoutStore')->name('checkout.store'); 
+Route::get('order-review','ProductController@orderReview')->name('order.review');
 });
 //Update product Quantity
 Route::get('cart/update-quantity/{id}/{quantity}','ProductController@updateCartquantity')->name('update.cartquantity');
 #Apply Coupon Code
 Route::post('cart/apply-coupon','ProductController@applyCoupon')->name('apply.coupon');
 
-Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
+Auth::routes(['verify'=>true]);
+Route::match(['get','post'],'/home','IndexController@home');
 
 Route::group(['middleware' =>['auth']],function()
 {

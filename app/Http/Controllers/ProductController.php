@@ -8,6 +8,9 @@ use RealRashid\SweetAlert\Facades\Alert;
 use Auth;
 use Session;
 use Image;
+use App\User;
+use App\DeliveryAddress;
+use App\Country;
 use App\Product;
 use App\Category; 
 use App\Cart;
@@ -339,5 +342,66 @@ class ProductController extends Controller
         }
      }
 
+     public function checkout()
+     {
+             $user_id = Auth::user()->id;
+             $user_details = User::find($user_id);
+             $country = Country::get();
+             $shippingDetails = DeliveryAddress::where('user_id',$user_id)->first();
+             return view('shop.products.checkout',compact('user_details','country','shippingDetails'));
+     }
 
+     public function orderReview()
+     {
+        $user_id = Auth::user()->id;
+        $userDetails = User::find($user_id);
+        $user_email = Auth::user()->email;
+        $userCart = Cart::where(['user_email'=>$user_email])->get();
+        foreach($userCart as $key=>$product){
+                $productDetails = Product::where('id',$product->product_id)->first();
+                $userCart[$key]->image = '$productDetails->image';
+        }
+        //dd($userCart);
+        $shippingDetails = DeliveryAddress::where('user_id',$user_id)->first();
+        return view('shop.products.orderreview',compact('userDetails','userCart','shippingDetails'));
+     }
+
+     public function checkoutStore(Request $request)
+     {
+        $user_id = Auth::user()->id;
+        $user_email = Auth::user()->email;
+        //check if shipping address exists
+        $shippingCount = DeliveryAddress::where('user_id',$user_id)->count();
+        $shippingDetails = array();
+        if($shippingCount > 0)
+        {
+            $shippingDetails =  DeliveryAddress::where('user_id',$user_id)->first();  
+        }
+        //update Cart With Email
+        $session_id = Session::get('session_id');
+        Cart::where(['session_id'=>$session_id])->update(['user_email'=>$user_email]);
+        User::where('id',$user_id)->update(['name'=>$request['billing_name'],'address'=>$request
+        ['billing_address'],'city'=>$request['billing_city'],'state'=>$request['billing_state'],
+        'country'=>$request['billing_country'],'pincode'=>$request['billing_pincode'],'mobile'=>$request['billing_mobile']]);
+        if($shippingCount > 0)
+        {  
+         DeliveryAddress::where('id',$user_id)->update(['name'=>$request['shipping_name'],'address'=>$request
+        ['shipping_address'],'city'=>$request['shipping_city'],'state'=>$request['shipping_state'],
+        'country'=>$request['shipping_country'],'pincode'=>$request['shipping_pincode'],'mobile'=>$request['shipping_mobile']]);
+        }
+        else{
+                $shipping = new DeliveryAddress();
+                $shipping->user_id = $user_id;
+                $shipping->user_email = $user_email;
+                $shipping->name       = $request->shipping_name;
+                $shipping->address    = $request->shipping_address;
+                $shipping->city       = $request->shipping_city;
+                $shipping->state      = $request->shipping_state;
+                $shipping->country    = $request->shipping_country;
+                $shipping->pincode    = $request->shipping_pincode;
+                $shipping->mobile     = $request->shipping_mobile;
+                $shipping->save();
+        }
+        return redirect()->route('order.review')->with('flash_message_success','Your address details are submitted successfully!');
+      }
 }
