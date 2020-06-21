@@ -39,6 +39,7 @@ Route::post('update-adddress','UsersController@updateAddress')->name('user.updat
 Route::get('checkout','ProductController@checkout')->name('product.checkout');
 Route::post('checkout/store','ProductController@checkoutStore')->name('checkout.store'); 
 Route::get('order-review','ProductController@orderReview')->name('order.review');
+Route::post('place-order','ProductController@placeOrder')->name('place.order');
 });
 //Update product Quantity
 Route::get('cart/update-quantity/{id}/{quantity}','ProductController@updateCartquantity')->name('update.cartquantity');

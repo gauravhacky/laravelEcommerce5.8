@@ -107,7 +107,7 @@
 <div class="cart-box-main">
     <div class="container">
         <div class="row">
-            
+           
             <div class="col-lg-12">
                 <div class="table-main table-responsive">
                     <table class="table">
@@ -188,7 +188,7 @@
             
         </div>
 
-        <form name="paymentForm" id="paymentForm" action="{{url('/place-order')}}" method="post"> {{csrf_field()}}
+        <form name="paymentForm" id="paymentForm" action="{{route('place.order')}}" method="post"> {{csrf_field()}}
            <input type="hidden" value="{{$grand_total}}" name="grand_total">
             <hr class="mb-4">
             <div class="title-left">
@@ -196,11 +196,11 @@
             </div>
             <div class="d-block my-3">
                 <div class="custom-control custom-radio">
-                    <input id="credit" name="paymentMethod" value="cod"  type="radio" class="custom-control-input cod">
+                    <input id="credit" name="payment_method" value="cod"  type="radio" class="custom-control-input cod">
                     <label class="custom-control-label" for="credit">Cash On Delivery</label>
                 </div>
                 <div class="custom-control custom-radio">
-                    <input id="debit" name="paymentMethod" value="paypal" type="radio" class="custom-control-input paypal" >
+                    <input id="debit" name="payment_method" value="paypal" type="radio" class="custom-control-input paypal" >
                     <label class="custom-control-label" for="debit">Paypal</label>
                 </div>
                 <div class="col-12 d-flex shopping-box">
@@ -211,4 +211,20 @@
     </div>
 </div>
 <!-- End Cart -->
+@endsection
+
+@section('js')
+<script>
+    function selectPaymentMethod()
+    {
+        if($('.paypal').is(':checked') || $('.cod').is(':checked'))
+        {
+           // alert('checked');
+        }
+        else{
+            alert('Please select Payment Method');
+            return false;
+        }
+    }
+    </script>
 @endsection

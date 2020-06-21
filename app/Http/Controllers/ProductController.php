@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use RealRashid\SweetAlert\Facades\Alert;
 use Auth;
+use DB;
 use Session;
 use Image;
 use App\User;
@@ -17,6 +18,8 @@ use App\Cart;
 use App\Coupan;
 use App\ProductAttribute;
 use App\ProductImage;
+use App\Order;
+use App\OrderProduct;
 
 class ProductController extends Controller
 {
@@ -233,9 +236,15 @@ class ProductController extends Controller
 
         public function addTocart()
         {       
-               
-                $session_id = Session::get('session_id');
-                $usercart = Cart::where('session_id',$session_id)->orderBy('id','desc')->get();
+                if(Auth::check()){
+                        $user_email = Auth::user()->email;
+                        $usercart = Cart::where(['user_email'=>$user_email])->get();
+                }
+                else {
+                        $session_id = Session::get('session_id');
+                        $usercart = Cart::where('session_id',$session_id)->orderBy('id','desc')->get();
+                }
+                
                 //dd($usercart);
                 foreach($usercart as $key=>$products)
                 {
@@ -359,7 +368,8 @@ class ProductController extends Controller
         $userCart = Cart::where(['user_email'=>$user_email])->get();
         foreach($userCart as $key=>$product){
                 $productDetails = Product::where('id',$product->product_id)->first();
-                $userCart[$key]->image = '$productDetails->image';
+                $userCart[$key]->image = $productDetails->image;
+               
         }
         //dd($userCart);
         $shippingDetails = DeliveryAddress::where('user_id',$user_id)->first();
@@ -404,4 +414,44 @@ class ProductController extends Controller
         }
         return redirect()->route('order.review')->with('flash_message_success','Your address details are submitted successfully!');
       }
+      
+      public function placeOrder(Request $request)
+      {
+              //dd($request);
+              $user_id =Auth::user()->id;
+              $user_email = Auth::user()->email;
+             
+              $shippingDetails = DeliveryAddress::where(['user_email'=>$user_email])->first();
+              $order = new Order;
+              $order->user_id = $user_id;
+              $order->email = $user_email;
+              $order->name = $shippingDetails->name;
+              $order->address = $shippingDetails->address;
+              $order->city = $shippingDetails->city;
+              $order->state = $shippingDetails->state;
+              $order->country = $shippingDetails->country;
+              $order->mobile = $shippingDetails->mobile;
+              $order->coupon_code = $request->coupon_code ? $request->coupon_code: '';
+              $order->coupon_amount = $request->coupon_amount ? $request->coupon_amount : '';
+              $order->order_status = 'new';
+              $order->payment_method = $request->payment_method;
+              $order->grant_total = $request->grand_total;
+              $order->save();
+
+              $order_id = DB::getPdo()->lastinsertID();
+              $cartproducts = Cart::where(['user_email'=>$user_email])->get();
+              foreach($cartproducts as $pro){
+                      $cartPro= new OrderProduct;
+                      $cartPro->order_id = $order_id;
+                      $cartPro->user_id = $user_id;
+                      $cartPro->product_id = $pro->product_id;
+                      $cartPro->product_code = $pro->product_code;
+                      $cartPro->product_name = $pro->product_name;
+                      $cartPro->product_color = $pro->product_color;
+                      $cartPro->product_size = $pro->size;
+                      $cartPro->product_price = $pro->price;
+                      $cartPro->product_qty = $pro->quantity;
+                      $cartPro->save();
+              }
+        }
 }
